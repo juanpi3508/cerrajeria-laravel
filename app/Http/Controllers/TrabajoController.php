@@ -13,6 +13,11 @@ class TrabajoController extends Controller
     public function index()
     {
         //
+        $trabajos = Trabajo::whereIn('estado', ['pendiente','en_camino'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('trabajos.index', compact('trabajos'));
     }
 
     /**
@@ -21,6 +26,7 @@ class TrabajoController extends Controller
     public function create()
     {
         //
+        return view('trabajos.create');
     }
 
     /**
@@ -29,6 +35,23 @@ class TrabajoController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'cliente_nombre' => 'required|string|max:80',
+            'telefono' => 'required|string|max:15',
+            'direccion' => 'required|string|max:255',
+            'tipo_servicio' => 'required|string|max:255',
+        ]);
+
+        Trabajo::create([
+            'cliente_nombre' => $request->cliente_nombre,
+            'telefono' => $request->telefono,
+            'direccion' => $request->direccion,
+            'tipo_servicio' => $request->tipo_servicio,
+            'estado' => 'pendiente',
+        ]);
+
+        return redirect()->route('trabajos.index')
+            ->with('success', 'Trabajo registrado correctamente');
     }
 
     /**
@@ -37,6 +60,7 @@ class TrabajoController extends Controller
     public function show(Trabajo $trabajo)
     {
         //
+        return view('trabajos.show', compact('trabajo'));
     }
 
     /**
@@ -45,6 +69,7 @@ class TrabajoController extends Controller
     public function edit(Trabajo $trabajo)
     {
         //
+        return view('trabajos.edit', compact('trabajo'));
     }
 
     /**
@@ -53,7 +78,20 @@ class TrabajoController extends Controller
     public function update(Request $request, Trabajo $trabajo)
     {
         //
+        $request->validate([
+            'cliente_nombre' => 'required|string|max:80',
+            'telefono' => 'required|string|max:15',
+            'direccion' => 'required|string|max:255',
+            'tipo_servicio' => 'required|string|max:255',
+            'estado' => 'required|in:pendiente,en_camino,completado,cobrado',
+        ]);
+
+        $trabajo->update($request->all());
+
+        return redirect()->route('trabajos.index')
+            ->with('success', 'Trabajo actualizado correctamente');
     }
+
 
     /**
      * Remove the specified resource from storage.

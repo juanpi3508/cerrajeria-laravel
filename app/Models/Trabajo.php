@@ -11,13 +11,11 @@ class Trabajo extends Model
         'telefono',
         'direccion',
         'tipo_servicio',
-        'estado'
+        'estado',
     ];
 
-    const ESTADOS = [
-        'pendiente',
-        'en_camino',
-        'completado',
-        'cobrado'
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
