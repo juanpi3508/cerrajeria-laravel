@@ -1,59 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+**Proyecto:** Sistema de Gestión – Cerrajería
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Estudiante:** Juan Morales
+**Fecha:** 19/12/2025
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Mis Decisiones de Diseño
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Tabla
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Nombre de la tabla:** trabajos
 
-## Learning Laravel
+### Campos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+| Campo            | Tipo        | ¿Obligatorio? |
+|------------------|------------|---------------|
+| id               | bigint     | Sí            |
+| cliente_nombre   | varchar    | Sí            |
+| telefono         | varchar    | Sí            |
+| direccion        | varchar    | Sí            |
+| tipo_servicio    | varchar    | Sí            |
+| estado           | varchar    | Sí            |
+| created_at       | timestamp  | Sí            |
+| updated_at       | timestamp  | Sí            |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Justificación de Diseño
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+El sistema fue diseñado para registrar los servicios realizados por una cerrajería, permitiendo almacenar información del cliente, tipo de servicio solicitado y el estado del trabajo.
 
-### Premium Partners
+La fecha del registro se guarda automáticamente mediante el sistema, permitiendo su corrección en caso de error.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Los trabajos no se eliminan físicamente de la base de datos. En su lugar, se implementó un borrado lógico mediante el estado **inhabilitado**, con el objetivo de conservar el historial para fines de control, auditoría o reclamos.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Estados del Trabajo
 
-## Code of Conduct
+Los trabajos pueden tener los siguientes estados:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- pendiente  
+- en_camino  
+- completado  
+- cobrado  
+- inhabilitado  
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Tipo de Servicio
 
-## License
+El tipo de servicio se selecciona desde una lista predefinida para evitar errores de ingreso manual.  
+Algunos ejemplos:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- apertura_puerta  
+- cambio_cerradura  
+- duplicado_llaves  
+- reparacion_cerradura  
+- emergencia_24h  
+
+---
+
+## Tecnologías Utilizadas
+
+- Laravel  
+- PHP  
+- PostgreSQL  
+- Bootstrap  
+- Git y GitHub  
+
+---
+
+<img width="1920" height="635" alt="imagen" src="https://github.com/user-attachments/assets/767ab882-3141-4c58-bf1f-d043d65c38cf" />
+
+<img width="1914" height="776" alt="imagen" src="https://github.com/user-attachments/assets/8b90747c-bc2d-480e-a9ec-aa53880c67b4" />
+
+<img width="1920" height="877" alt="imagen" src="https://github.com/user-attachments/assets/d34e1138-f560-40f9-8a5b-c632f491a6a8" />
+
+<img width="1920" height="926" alt="imagen" src="https://github.com/user-attachments/assets/766707f7-034c-41b4-8849-8b0efa3c75b3" />
+
+
