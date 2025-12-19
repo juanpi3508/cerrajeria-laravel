@@ -15,16 +15,16 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h6 class="card-title mb-1">
-                    {{ $trabajo->cliente_nombre }}
+                   <p> <b>Cliente: </b>{{ $trabajo->cliente_nombre }}</p>
                 </h6>
                 <p class="mb-1">
-                    {{ $trabajo->telefono }}
+                    <p><b>Teléfono: </b>{{ $trabajo->telefono }}
                 </p>
                 <p class="mb-1">
-                    {{ $trabajo->direccion }}
+                    <p><b>Dirección: </b>{{ $trabajo->direccion }}
                 </p>
                 <p class="mb-1">
-                    {{ $trabajo->tipo_servicio }}
+                    <p><b>Tipo de servicio: </b>{{ $trabajo->tipo_servicio }}
                 </p>
                 <span class="badge bg-primary">
                 {{ ucfirst(str_replace('_', ' ', $trabajo->estado)) }}
