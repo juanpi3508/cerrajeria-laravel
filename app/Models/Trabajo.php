@@ -18,4 +18,20 @@ class Trabajo extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public const TIPOS_SERVICIO = [
+        'apertura_puerta',
+        'cambio_cerradura',
+        'duplicado_llaves',
+        'reparacion_cerradura',
+        'emergencia_24h',
+    ];
+
+    public const ESTADOS = [
+        'pendiente',
+        'en_camino',
+        'completado',
+        'cobrado',
+        'inhabilitado'
+    ];
 }

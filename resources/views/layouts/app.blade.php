@@ -12,6 +12,7 @@
     <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Cerrajería</span>
     </div>
+
 </nav>
 <div class="container">
     @if(session('success'))

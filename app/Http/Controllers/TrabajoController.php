@@ -39,7 +39,7 @@ class TrabajoController extends Controller
             'cliente_nombre' => 'required|string|max:80',
             'telefono' => 'required|string|max:15',
             'direccion' => 'required|string|max:255',
-            'tipo_servicio' => 'required|string|max:255',
+            'tipo_servicio' => 'required|in:' . implode(',', \App\Models\Trabajo::TIPOS_SERVICIO),
         ]);
 
         Trabajo::create([
@@ -82,7 +82,7 @@ class TrabajoController extends Controller
             'cliente_nombre' => 'required|string|max:80',
             'telefono' => 'required|string|max:15',
             'direccion' => 'required|string|max:255',
-            'tipo_servicio' => 'required|string|max:255',
+            'tipo_servicio' => 'required|in:' . implode(',', \App\Models\Trabajo::TIPOS_SERVICIO),
             'estado' => 'required|in:pendiente,en_camino,completado,cobrado',
         ]);
 
@@ -91,13 +91,35 @@ class TrabajoController extends Controller
         return redirect()->route('trabajos.index')
             ->with('success', 'Trabajo actualizado correctamente');
     }
-
+    public function historial()
+    {
+        $trabajos = Trabajo::whereIn('estado',['completado','cobrado','inhabilitado'])
+            ->orderBy('updated_at','desc')
+            ->get();
+        return view('trabajos.historial', compact('trabajos'));
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Trabajo $trabajo)
     {
-        //
+        $trabajo->update([
+            'estado' => 'inhabilitado'
+        ]);
+        return redirect()->route('trabajos.index')
+            ->with('success','Trabajo inhabilitado correctamente');
     }
+
+    public function completar(Trabajo $trabajo)
+    {
+        $trabajo->update([
+            'estado' => 'completado'
+        ]);
+
+        return redirect()->route('trabajos.index')
+            ->with('success', 'Trabajo marcado como completado');
+    }
+
+
 }
